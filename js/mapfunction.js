@@ -1,8 +1,8 @@
 function mapfunction(selector){
 
     var margin = {top: 0, left: 0, right: 0, bottom: 0},
-    scale = 100,
-    height = 400 - margin.top - margin.bottom,
+    scale = 1000,
+    height = 500 - margin.top - margin.bottom,
     width = 800 - margin.left - margin.right;
     mapurl = "js/us_states.json"
 
@@ -13,6 +13,15 @@ function mapfunction(selector){
         .attr("preserveAspectRatio", "xMinYMin")
 
     // var g = svg.append("g")
+
+    // var colorScale = d3.scaleThreshold()
+    //     .range([ "#ff0803", "#0000ff", "#ffffff"]);
+
+    var colorScale = {
+        "R": "#ff0803",
+        "D": "#0000ff",
+        "Coalition": "Black"
+    }
 
     var projection = d3.geoAlbersUsa()
         .scale(scale)
@@ -29,12 +38,28 @@ function mapfunction(selector){
 
         svg.selectAll(".state")
             .data(country).enter().append("path")
-                .attr("d", geoPath)
-                .attr("class", "state")
-                .attr("stroke", "#000000")
-                .attr("stroke-width", 0.2)
-        
-        
+            .attr("d", geoPath)
+            .attr("class", "state")
+            .attr("stroke", "#000000")
+            .attr("stroke-width", 0.2)
+            .attr("fill", function(d, i){
+                console.log("d", d.properties.name);
+
+                var fd = _.filter(coviddata, function(obj){
+                    return obj["State"] === d.properties.name
+                })
+
+                if(fd[0] !== undefined){
+                    console.log("fd", fd[0]);
+                    return colorScale[fd[0]["Party"]]
+                }else{
+                    console.log("fd", "Data not available");
+                }
+
+                
+                
+            })
+            
     })
 
 } //end mapfunction
