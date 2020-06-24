@@ -16,7 +16,7 @@ function mapfunction(selector){
 
     var colorScale = d3.scaleThreshold()
     .domain([0, 100, 500, 1000, 5000, 10000, 20000, 40000, 60000])
-    .range([ "#fff5eb", "#fee6ce", "#fdd0a2", "#fdae6b", "#fd8d3c", "#f16913", "#d94801", "#a63603","#7f2704"]);
+    .range(["#f7fcfd", "#e0ecf4", "#bfd3e6", "#9ebcda", "#8c96c6", "#8c6bb1", "#88419d", "#810f7c", "#4d004b"] );
 
     var colorScaleParty = {
         "R": "#ff6b6b",
@@ -59,12 +59,14 @@ function mapfunction(selector){
         
         var size = d3.scaleSqrt()
             .domain(valueExtent)  // What's in the data
-            .range([ 10, 70])  // Size in pixel
+            .range([5, 45])  // Size in pixel
 
         svg.selectAll(".state")
             .data(country).enter().append("path")
             .attr("d", geoPath)
-            .attr("class", "state")
+            .attr("class", function(d){
+                return "state "+ d.properties.name;
+            })
             .attr("stroke", "#000000")
             .attr("stroke-width", 0.2)
             .attr("fill", function(d, i){
@@ -110,7 +112,7 @@ function mapfunction(selector){
                 return d["latlong"][0]; 
             })
             .attr("cy", function (d){ return d["latlong"][1]; })
-            .attr("fill-opacity", "75%")
+            .attr("fill-opacity", "85%")
             .attr("fill", function(d){
                 
                 var fd = _.filter(coviddata, function(obj){
