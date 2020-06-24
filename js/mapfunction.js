@@ -60,7 +60,7 @@ function mapfunction(selector, month){
         })
         if(fd[0] !== undefined){
             // console.log("fd", fd[0]);
-            return d["name"]+": "+fd[0][month];
+            return d["name"]+": "+fd[0][month].toLocaleString('en-IN');
         }else{
             return d["name"]+": NA";
             // console.log("fd", "Data not available");
