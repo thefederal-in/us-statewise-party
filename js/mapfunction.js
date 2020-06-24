@@ -14,7 +14,7 @@ function mapfunction(selector){
 
     // var g = svg.append("g")
 
-    var projection = d3.geoMercator()
+    var projection = d3.geoAlbersUsa()
         .scale(scale)
         .translate([width / 2, height / 2])
 
