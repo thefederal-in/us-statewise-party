@@ -14,7 +14,6 @@ function mapfunction(selector, month){
         .attr("viewBox", "0 0 " + width + " " + height)
         .attr("preserveAspectRatio", "xMinYMin")
 
-    // var g = svg.append("g")
 
     var colorScale = d3.scaleQuantize()
     .range(["#fcfbfd","#f1eff6","#e2e1ef","#cecee5","#b6b5d8","#9e9bc9","#8782bc","#7363ac","#61409b","#501f8c","#3f007d"]);
@@ -45,7 +44,6 @@ function mapfunction(selector, month){
         var fd = _.filter(coviddata, function(obj){
             return obj["State"] === d.properties.name
         })
-        // return d.properties.name + ":" + fd[0]["Party"];
         return d.properties.name;
     });
 
@@ -59,11 +57,9 @@ function mapfunction(selector, month){
             return obj["State"] === d["name"]
         })
         if(fd[0] !== undefined){
-            // console.log("fd", fd[0]);
             return d["name"]+": "+fd[0][month].toLocaleString('en-IN');
         }else{
             return d["name"]+": NA";
-            // console.log("fd", "Data not available");
         } 
     });
 
@@ -109,7 +105,6 @@ function mapfunction(selector, month){
                 })
 
                 if(fd[0] !== undefined){
-                    // console.log("fd", fd[0]);
                     return colorScaleParty[fd[0]["Party"]];
                 }else{
                     return "#FFFFFF";
@@ -138,11 +133,9 @@ function mapfunction(selector, month){
                     return obj["State"] === d["name"]
                 })
                 if(fd[0] !== undefined){
-                    // console.log("fd", fd[0]);
                     return size(fd[0][month]);
                 }else{
-                    return 10;
-                    // console.log("fd", "Data not available");
+                    return 0;
                 }  
 
             })
