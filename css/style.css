@@ -30,6 +30,15 @@ svg{
     font-size: 14px;
 }
 
+path, circle{
+    transition: all .5s;
+    cursor: pointer;
+}
+
+path:hover, circle:hover{
+    fill: #333;
+}
+
 
 .d3-tip {
     line-height: 1;
