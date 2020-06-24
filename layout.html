@@ -33,7 +33,15 @@
     <script src="js/importdata.js"></script>
     <script src="js/mapfunction.js"></script>
     <script>
-        mapfunction("#us");
+        
+        mapfunction("#us", "June*");
+        $("#june").on("click", function(){
+            mapfunction("#us", "June*");
+        })
+
+        $("#may").on("click", function(){
+            mapfunction("#us", "May");
+        })
     </script>
 </body>
 </html>
