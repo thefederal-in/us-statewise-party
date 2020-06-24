@@ -17,7 +17,7 @@
             </div>
             <div class="covid-nav">
                 <button id="may">Till May 30</button>
-                <button id="june">June</button>
+                <button id="june" style="background-color:red">June</button>
             </div>
         </nav>
         <section class="map" id="us">
@@ -36,10 +36,14 @@
         
         mapfunction("#us", "June*");
         $("#june").on("click", function(){
+            $(".covid-nav button").css("background-color", "#cccccc")
+            $(this).css("background-color", "red")
             mapfunction("#us", "June*");
         })
 
         $("#may").on("click", function(){
+            $(".covid-nav button").css("background-color", "#cccccc")
+            $(this).css("background-color", "red")
             mapfunction("#us", "May");
         })
     </script>
