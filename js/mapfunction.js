@@ -123,7 +123,7 @@ function mapfunction(selector, defaultmonth){
             .attr("fill", "#000000")
             .attr("stroke", "#000000")
 
-            function update(month){
+            function update(month, minmax_range){
 
                 var tool_tip_circle = d3.tip()
                     .attr("class", "d3-tip")
@@ -147,7 +147,7 @@ function mapfunction(selector, defaultmonth){
                 
                 var size = d3.scaleSqrt()
                     .domain(valueExtent)  // What's in the data
-                    .range([5, 35])  // Size in pixel
+                    .range(minmax_range)  // Size in pixel
                 
                 svg.selectAll(".myCircles")
                     .on('mouseover', tool_tip_circle.show)
@@ -158,6 +158,14 @@ function mapfunction(selector, defaultmonth){
                         var fd = _.filter(coviddata, function(obj){
                             return obj["State"] === d["name"]
                         })
+                        
+                        var ny = _.filter(coviddata, function(obj){
+                            return obj["State"] === "New York"
+                        })
+
+                        console.log(ny[0][month], size(ny[0][month]));
+                        
+
                         if(fd[0] !== undefined){
                             return size(fd[0][month]);
                         }else{
@@ -168,28 +176,28 @@ function mapfunction(selector, defaultmonth){
             
             }
         
-            update(defaultmonth)
+            update(defaultmonth, [5, 35])
 
             d3.select("#june").on("click", function(){
                 d3.selectAll(".covid-nav button").classed("active", false);
                 d3.select(this).classed("active", true);
-                update("June*") 
+                update("June*", [5, 50]) 
             });
 
             d3.select("#may").on("click", function(){
                 d3.selectAll(".covid-nav button").classed("active", false);
                 d3.select(this).classed("active", true);
-                update("May") 
+                update("May", [5, 45]) 
             });
             d3.select("#april").on("click", function(){
                 d3.selectAll(".covid-nav button").classed("active", false);
                 d3.select(this).classed("active", true);
-                update("April") 
+                update("April", [5, 40]) 
             });
             d3.select("#march").on("click", function(){
                 d3.selectAll(".covid-nav button").classed("active", false);
                 d3.select(this).classed("active", true);
-                update("March") 
+                update("March", [5, 35]) 
             });
             
             
