@@ -170,9 +170,17 @@ function mapfunction(selector, defaultmonth){
         
             update(defaultmonth)
 
-            d3.select("#june").on("click", function(){ update("June*") });
+            d3.select("#june").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("June*") 
+            });
 
-            d3.select("#may").on("click", function(){ update("May") });
+            d3.select("#may").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("May") 
+            });
             
             
     })
