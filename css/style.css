@@ -21,11 +21,23 @@ svg{
     margin: 0 0 10px 0;
 }
 .tf-container nav button {
-    font-size: 14px;
+    font-size: 12px;
     border: none;
     outline: none;
     text-transform: uppercase;
+    color: #777;
+    padding: 3px 10px;
 }
+.tf-container nav button:hover {
+    background-color: red;
+    color: #FFF !important;
+}
+
+button.active{
+    background-color: red;
+    color: #FFF !important;
+}
+
 .tf-container nav input {
     font-size: 14px;
 }
@@ -50,6 +62,8 @@ path{
 path:hover, circle:hover{
     fill: #666 !important;
 }
+
+
 
 
 
