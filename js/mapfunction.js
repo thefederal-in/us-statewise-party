@@ -181,6 +181,16 @@ function mapfunction(selector, defaultmonth){
                 d3.select(this).classed("active", true);
                 update("May") 
             });
+            d3.select("#april").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("April") 
+            });
+            d3.select("#march").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("March") 
+            });
             
             
     })
