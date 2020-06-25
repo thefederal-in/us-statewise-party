@@ -57,7 +57,7 @@ function mapfunction(selector, month){
             return obj["State"] === d["name"]
         })
         if(fd[0] !== undefined){
-            return d["name"]+": "+fd[0][month].toLocaleString('en-IN');
+            return  d["name"]+":<br><span>"+fd[0][month].toLocaleString('en-IN')+"</span>";
         }else{
             return d["name"]+": NA";
         } 
@@ -94,7 +94,18 @@ function mapfunction(selector, month){
             .data(country).enter().append("path")
             .attr("d", geoPath)
             .attr("class", function(d){
-                return "state "+ d.properties.name;
+                // return "state "+ d.properties.name;
+
+                var fd = _.filter(coviddata, function(obj){
+                    return obj["State"] === d.properties.name
+                })
+
+                if(fd[0] !== undefined){
+                    return "state " + fd[0]["Party"];
+                }else{
+                    return "na";
+                }       
+
             })
             .attr("stroke", "#000000")
             .attr("stroke-width", 0.2)
@@ -123,6 +134,18 @@ function mapfunction(selector, month){
             .attr("cx", function(d){ return d["latlong"][0];})
             .attr("cy", function (d){ return d["latlong"][1]; })
             .attr("r", 0)
+            .attr("class", function(d){
+
+                var fd = _.filter(coviddata, function(obj){
+                    return obj["State"] === d["name"]
+                })
+                if(fd[0] !== undefined){
+                    return "myCircles " + fd[0]["Party"];
+                }else{
+                    return "myCircles NA";
+                }  
+
+            })
             .attr("fill-opacity", "85%")
             .on('mouseover', tool_tip_circle.show)
             .on('mouseout', tool_tip_circle.hide)
