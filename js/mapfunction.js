@@ -1,4 +1,4 @@
-function mapfunction(selector, month){
+function mapfunction(selector, defaultmonth){
 
     var margin = {top: 0, left: 0, right: 0, bottom: 0},
     scale = 1000,
@@ -15,8 +15,8 @@ function mapfunction(selector, month){
         .attr("preserveAspectRatio", "xMinYMin")
 
 
-    var colorScale = d3.scaleQuantize()
-    .range(["#fcfbfd","#f1eff6","#e2e1ef","#cecee5","#b6b5d8","#9e9bc9","#8782bc","#7363ac","#61409b","#501f8c","#3f007d"]);
+    // var colorScale = d3.scaleQuantize()
+    // .range(["#fcfbfd","#f1eff6","#e2e1ef","#cecee5","#b6b5d8","#9e9bc9","#8782bc","#7363ac","#61409b","#501f8c","#3f007d"]);
 
     var colorScaleParty = {
         "R": "#ff6b6b",
@@ -49,46 +49,18 @@ function mapfunction(selector, month){
 
     svg.call(tool_tip_map);
     
-    var tool_tip_circle = d3.tip()
-    .attr("class", "d3-tip")
-    .offset([0, 0])
-    .html(function(d){
-        var fd = _.filter(coviddata, function(obj){
-            return obj["State"] === d["name"]
-        })
-        if(fd[0] !== undefined){
-            return  d["name"]+":<br><span>"+fd[0][month].toLocaleString('en-IN')+"</span>";
-        }else{
-            return d["name"]+": NA";
-        } 
-    });
-
-    svg.call(tool_tip_circle);
+    
 
     
 
     d3.json(mapurl, function(mapdata){
-        console.log("mapdata", mapdata);
+        // console.log("mapdata", mapdata);
         
         var country = topojson.feature(mapdata, mapdata.objects.us_states).features;
 
-        console.log("country", country);
+        // console.log("country", country);
 
         var stateCentroid = centroids(country)
-
-        var valueExtent = d3.extent(coviddata, function(obj) {
-            // console.log(obj["June*"]);
-            
-            return obj[month]; 
-        })
-
-        console.log(valueExtent);
-        
-        colorScale.domain(valueExtent)
-        
-        var size = d3.scaleSqrt()
-            .domain(valueExtent)  // What's in the data
-            .range([5, 45])  // Size in pixel
 
         svg.selectAll(".state")
             .data(country).enter().append("path")
@@ -127,7 +99,7 @@ function mapfunction(selector, month){
 
     
 
-        svg.selectAll("myCircles")
+        svg.selectAll(".myCircles")
             .data(stateCentroid)
             .enter()
             .append("circle")
@@ -146,41 +118,69 @@ function mapfunction(selector, month){
                 }  
 
             })
-            .attr("fill-opacity", "85%")
-            .on('mouseover', tool_tip_circle.show)
-            .on('mouseout', tool_tip_circle.hide)
-            .transition().duration(1000)
-            .attr("r", function(d){
-
-                var fd = _.filter(coviddata, function(obj){
-                    return obj["State"] === d["name"]
-                })
-                if(fd[0] !== undefined){
-                    return size(fd[0][month]);
-                }else{
-                    return 0;
-                }  
-
-            })
-            .attr("fill", function(d){
-                
-                
-                var fd = _.filter(coviddata, function(obj){
-                    return obj["State"] === d["name"]
-                })
-
-                
-
-                if(fd[0] !== undefined){
-                    console.log(fd[0][month], colorScale(fd[0][month]));
-                    return colorScale(fd[0][month]);
-                }else{
-                    return "#FFFFFF";
-                }  
-
-            })
+            .attr("fill-opacity", "70%")
+            .attr("r", 0)
+            .attr("fill", "#000000")
             .attr("stroke", "#000000")
-            .attr("stroke-width", 0.2)
+
+            function update(month){
+
+                var tool_tip_circle = d3.tip()
+                    .attr("class", "d3-tip")
+                    .offset([-20, 0])
+                    .html(function(d){
+                        var fd = _.filter(coviddata, function(obj){
+                            return obj["State"] === d["name"]
+                        })
+                        if(fd[0] !== undefined){
+                            return  d["name"]+":<br><span>"+fd[0][month].toLocaleString('en-IN')+"</span>";
+                        }else{
+                            return d["name"]+": NA";
+                        } 
+                    });
+
+                    svg.call(tool_tip_circle);
+
+                var valueExtent = d3.extent(coviddata, function(obj) {
+                    return obj[month]; 
+                })
+                
+                var size = d3.scaleSqrt()
+                    .domain(valueExtent)  // What's in the data
+                    .range([5, 35])  // Size in pixel
+                
+                svg.selectAll(".myCircles")
+                    .on('mouseover', tool_tip_circle.show)
+                    .on('mouseout', tool_tip_circle.hide)
+                    .transition().duration(500)
+                    .attr("r", function(d){
+
+                        var fd = _.filter(coviddata, function(obj){
+                            return obj["State"] === d["name"]
+                        })
+                        if(fd[0] !== undefined){
+                            return size(fd[0][month]);
+                        }else{
+                            return 0;
+                        }  
+        
+                    })
+            
+            }
+        
+            update(defaultmonth)
+
+            d3.select("#june").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("June*") 
+            });
+
+            d3.select("#may").on("click", function(){
+                d3.selectAll(".covid-nav button").classed("active", false);
+                d3.select(this).classed("active", true);
+                update("May") 
+            });
             
             
     })

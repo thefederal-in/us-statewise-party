@@ -23,7 +23,7 @@
             </div>
             <div class="covid-nav">
                 <button id="may">Till May 30</button>
-                <button id="june" style="background-color:red">June</button>
+                <button id="june" class="active">June</button>
             </div>
         </nav>
         <section class="map" id="us">
@@ -42,19 +42,19 @@
         
         mapfunction("#us", "June*");
         
-        $("#june").on("click", function(){
-            $(".covid-nav button").css("background-color", "#cccccc")
-            $(this).css("background-color", "red")
-            mapfunction("#us", "June*");
-	    $("#showall").click();
-        })
+        // $("#june").on("click", function(){
+        //     $(".covid-nav button").css("background-color", "#cccccc")
+        //     $(this).css("background-color", "red")
+        //     mapfunction("#us", "June*");
+	    // $("#showall").click();
+        // })
 
-        $("#may").on("click", function(){
-            $(".covid-nav button").css("background-color", "#cccccc")
-            $(this).css("background-color", "red")
-            mapfunction("#us", "May");
-	    $("#showall").click();
-        })
+        // $("#may").on("click", function(){
+        //     $(".covid-nav button").css("background-color", "#cccccc")
+        //     $(this).css("background-color", "red")
+        //     mapfunction("#us", "May");
+	    // $("#showall").click();
+        // })
         
         $("#republicans").on("click", function(){
             d3.selectAll("radiobtn").attr("checked", "unchecked")
@@ -62,7 +62,7 @@
            d3.selectAll(".state").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
            d3.selectAll(".state.R").attr("fill-opacity", "100%")
            d3.selectAll(".myCircles").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
-           d3.selectAll(".myCircles.R").attr("fill-opacity", "95%").attr("stroke-opacity", "95%")
+           d3.selectAll(".myCircles.R").attr("fill-opacity", "80%").attr("stroke-opacity", "80%")
         })
         
         $("#democrats").on("click", function(){
@@ -70,7 +70,7 @@
            d3.selectAll(".state").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
            d3.selectAll(".state.D").attr("fill-opacity", "100%")
            d3.selectAll(".myCircles").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
-           d3.selectAll(".myCircles.D").attr("fill-opacity", "95%").attr("stroke-opacity", "95%")
+           d3.selectAll(".myCircles.D").attr("fill-opacity", "80%").attr("stroke-opacity", "80%")
         })
         
         $("#coalition").on("click", function(){
@@ -78,12 +78,12 @@
            d3.selectAll(".state").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
            d3.selectAll(".state.Coalition").attr("fill-opacity", "100%")
            d3.selectAll(".myCircles").attr("fill-opacity", "10%").attr("stroke-opacity", "10%")
-           d3.selectAll(".myCircles.Coalition").attr("fill-opacity", "95%").attr("stroke-opacity", "95%")
+           d3.selectAll(".myCircles.Coalition").attr("fill-opacity", "80%").attr("stroke-opacity", "80%")
         })
 
         $("#showall").on("click", function(){
            d3.selectAll(".state").attr("fill-opacity", "100%").attr("stroke-opacity", "100%")
-           d3.selectAll(".myCircles").attr("fill-opacity", "95%").attr("stroke-opacity", "95%")
+           d3.selectAll(".myCircles").attr("fill-opacity", "80%").attr("stroke-opacity", "80%")
         })
 
 
