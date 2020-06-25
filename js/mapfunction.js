@@ -159,11 +159,11 @@ function mapfunction(selector, defaultmonth){
                             return obj["State"] === d["name"]
                         })
                         
-                        var ny = _.filter(coviddata, function(obj){
-                            return obj["State"] === "New York"
-                        })
+                        // var ny = _.filter(coviddata, function(obj){
+                        //     return obj["State"] === "New York"
+                        // })
 
-                        console.log(ny[0][month], size(ny[0][month]));
+                        // console.log(ny[0][month], size(ny[0][month]));
                         
 
                         if(fd[0] !== undefined){
