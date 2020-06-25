@@ -35,9 +35,22 @@ path, circle{
     cursor: pointer;
 }
 
+path{
+    fill: #FFF;
+}
+.state.R{
+    fill: #ff6b6b;
+}
+.state.D{
+    fill: #54a0ff;
+}
+.state.Coalition{
+    fill: #999999
+}
 path:hover, circle:hover{
     fill: #333;
 }
+
 
 
 .d3-tip {
@@ -46,8 +59,13 @@ path:hover, circle:hover{
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 4px;
-    font-size: 16px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Open Sans', sans-serif;
+  }
+.d3-tip span{
+    font-family: 'Rubik', sans-serif;
+    font-weight: 500;
   }
 
   /* Creates a small triangle extender for the tooltip */
