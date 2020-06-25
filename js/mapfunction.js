@@ -197,7 +197,7 @@ function mapfunction(selector, defaultmonth){
             d3.select("#march").on("click", function(){
                 d3.selectAll(".covid-nav button").classed("active", false);
                 d3.select(this).classed("active", true);
-                update("March", [5, 35]) 
+                update("March", [5, 30]) 
             });
             
             
