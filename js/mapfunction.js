@@ -118,7 +118,7 @@ function mapfunction(selector, defaultmonth){
                 }  
 
             })
-            .attr("fill-opacity", "80%")
+            .attr("fill-opacity", "70%")
             .attr("r", 0)
             .attr("fill", "#000000")
             .attr("stroke", "#000000")
@@ -127,7 +127,7 @@ function mapfunction(selector, defaultmonth){
 
                 var tool_tip_circle = d3.tip()
                     .attr("class", "d3-tip")
-                    .offset([0, 0])
+                    .offset([-20, 0])
                     .html(function(d){
                         var fd = _.filter(coviddata, function(obj){
                             return obj["State"] === d["name"]
@@ -147,7 +147,7 @@ function mapfunction(selector, defaultmonth){
                 
                 var size = d3.scaleSqrt()
                     .domain(valueExtent)  // What's in the data
-                    .range([5, 50])  // Size in pixel
+                    .range([5, 35])  // Size in pixel
                 
                 svg.selectAll(".myCircles")
                     .on('mouseover', tool_tip_circle.show)

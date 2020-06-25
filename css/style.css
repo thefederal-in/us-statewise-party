@@ -48,7 +48,7 @@ path{
     fill: #999999
 }
 path:hover, circle:hover{
-    fill: #333;
+    fill: #666 !important;
 }
 
 
